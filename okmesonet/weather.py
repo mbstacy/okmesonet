@@ -34,7 +34,7 @@ def get_mesonet_dataframe(start_date,end_date,site,local_time=None):
     return concat(df_pieces)
 
 def groupby(df,groupby,agg):
-    grp =data.groupby(groupby)
+    grp =df.groupby(groupby)
     return grp.agg(agg)
 
 def set_timezone(df,single_date, timezone=None):
