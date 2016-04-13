@@ -33,6 +33,10 @@ def get_mesonet_dataframe(start_date,end_date,site,local_time=None):
         df_pieces.append(df)
     return concat(df_pieces)
 
+def groupby(df,groupby,agg):
+    grp =data.groupby(groupby)
+    return grp.agg(agg)
+
 def set_timezone(df,single_date, timezone=None):
     central = pytz.timezone("US/Central")
     utc = pytz.timezone("UTC")
