@@ -43,6 +43,6 @@ def set_timezone(df,single_date, timezone=None):
     df["DATE"]=single_date.date()
     df['TIMESTAMP']=df.apply(lambda row:datetime(row['DATE'].year,row["DATE"].month,row["DATE"].day,int(row['TIME'] / 60),row['TIME'] % 60,0,0,utc),axis=1)
     if timezone:
-        df['TIMESTAMP']=df.apply(lambda row:row['TIMESTAMP'].astimezone(central),axis=1)
+        df['TIMESTAMP']=df.apply(lambda row:row['TIMESTAMP'].astimezone(central,ambiguous='NaT'),axis=1)
         df['DATE']=df.apply(lambda row:row['TIMESTAMP'].date(),axis=1) 
     return df            
