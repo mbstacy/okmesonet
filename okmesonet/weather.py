@@ -1,4 +1,4 @@
-from pandas import read_fwf, concat, options, read_pickle
+from pandas import read_fwf, concat, options, read_pickle,read_csv
 from datetime import datetime, timedelta
 import numpy as np
 import os, pytz
@@ -36,6 +36,18 @@ def get_mesonet_dataframe(start_date,end_date,site,local_time=None):
 def groupby(df,groupby,agg):
     grp =df.groupby(groupby)
     return grp.agg(agg)
+
+def site_data(status=None):
+    """ Function returns a pandas dataframe of Oklahoma Mesonet site infomation.
+        Keyword args:
+            status: None or active
+        Returns filtered dataframe if status is set to active
+    """
+    site=read_csv("https://www.mesonet.org/index.php/api/siteinfo/from_all_active_with_geo_fields/format/csv/",header=0)
+    if status:
+        return site[site.datd==20991231]
+    else:
+        return site
 
 def set_timezone(df,single_date, timezone=None):
     central = pytz.timezone("US/Central")
